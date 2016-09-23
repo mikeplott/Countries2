@@ -27,9 +27,10 @@ public class TestCountries {
             String theAbbreviation = columns[0];
             String theName = columns[1];
             Country country = new Country(theAbbreviation, theName);
-            CountriesWrapper.allCountries = new ArrayList<>();
-            CountriesWrapper.allCountries.add(country);
-            for (Country country1 : CountriesWrapper.allCountries) {
+            CountriesWrapper cw = new CountriesWrapper();
+            cw.allCountries = new ArrayList<>();
+            cw.allCountries.add(country);
+            for (Country country1 : cw.allCountries) {
                 ArrayList<Country> myCountries = Main.theCountries.get(country1.countryName.substring(0, 1));
                 if (myCountries == null) {
                     myCountries = new ArrayList<>();

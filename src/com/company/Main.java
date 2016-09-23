@@ -7,8 +7,7 @@ public class Main {
     public static HashMap<String, ArrayList<Country>> theCountries = new HashMap<>();
 
     public static void main(String[] args) throws Exception {
-        //CountriesWrapper countriesWrapper = new CountriesWrapper();
         Options.fileImport();
-        Options.displaySelection(countriesWrapper);
+        Options.displaySelection();
     }
 }
