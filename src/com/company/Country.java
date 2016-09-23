@@ -5,7 +5,7 @@ package com.company;
  */
 public class Country {
     String abbreviation;
-    String countryName;
+    public String countryName;
 
     public Country(String abbreviation, String countryName) {
         this.abbreviation = abbreviation;
