@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -23,17 +24,29 @@ public class Options {
             String theAbbreviation = columns[0];
             String theName = columns[1];
             Country country = new Country(theAbbreviation, theName);
-            CountriesWrapper.allCountries = new ArrayList<>();
-            CountriesWrapper.allCountries.add(country);
+            ArrayList<Country> myCountries = new ArrayList();
+            myCountries.add(country);
+            //CountriesWrapper.allCountries = new ArrayList<>();
+            //CountriesWrapper.allCountries.add(country);
             //CountriesWrapper allCountries = new CountriesWrapper(CountriesWrapper.allCountries);
-            for (Country country1 : CountriesWrapper.allCountries) {
-                ArrayList<Country> myCountries = Main.theCountries.get(country1.countryName.substring(0,1));
-                if (myCountries == null) {
-                    myCountries = new ArrayList<>();
-                    Main.theCountries.put(country1.countryName.substring(0,1), myCountries);
+//            for (Country country1 : CountriesWrapper.allCountries) {
+//                ArrayList<Country> myCountries = Main.theCountries.get(country1.countryName.substring(0,1));
+//                if (myCountries == null) {
+//                    myCountries = new ArrayList<>();
+//                    Main.theCountries.put(country1.countryName.substring(0,1), myCountries);
+//                }
+//                myCountries.add(country1);
+//            }
+//        }
+            for (Country country1 : myCountries) {
+                ArrayList<Country> selectedCountries = Main.theCountries.get(country1.countryName.substring(0,1));
+                if (selectedCountries == null) {
+                    selectedCountries = new ArrayList<>();
+                    Main.theCountries.put(country1.countryName.substring(0,1), selectedCountries);
                 }
-                myCountries.add(country1);
+                selectedCountries.add(country1);
             }
+
         }
     }
     // prompts the user for a letter and displays a list of countries beginning with that letter and saves that list to a text file
@@ -71,7 +84,7 @@ public class Options {
     }
     // json save method and logic to write text outputs to json files
     public static void saveJson(String x, CountriesWrapper countriesWrapper) throws IOException {
-        File jsonFile = new File(x + ".json");
+        File jsonFile = new File(x + "_countries.json");
         JsonSerializer serializer = new JsonSerializer();
         String json = serializer.deep(true).serialize(countriesWrapper);
         FileWriter jsonWriter = new FileWriter(jsonFile);
